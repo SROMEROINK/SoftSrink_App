@@ -329,6 +329,13 @@ return [
             // 'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
+
+        [
+            'text' => 'Materia Prima - Ingresos',
+            'route' => 'materia_prima.index',
+            'icon' => 'fas fa-fw fa-solid fa-cubes',
+        ],
+        
         [
             'text' => 'change_password',
             'url' => 'admin/settings',

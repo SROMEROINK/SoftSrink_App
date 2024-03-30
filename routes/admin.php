@@ -38,3 +38,11 @@ Route::resource('admin/productos', ProductoController::class)->names('admin.prod
 
 // Asegúrate de ajustar las rutas y sus nombres según la estructura que prefieras.
 
+
+Route::resource('mp_ingresos', MpIngresoController::class)->names([
+    'index' => 'mp_ingresos.index']);
+
+
+
+
+
