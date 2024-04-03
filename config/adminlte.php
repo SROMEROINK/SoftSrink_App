@@ -134,11 +134,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-info',
+    'usermenu_image' => true, 
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -154,8 +154,8 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_sidebar' => true,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -196,7 +196,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-success elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -236,7 +236,7 @@ return [
     |
     */
 
-    'right_sidebar' => false,
+    'right_sidebar' => true,
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
@@ -323,18 +323,234 @@ return [
             'label_color' => 'success',
         ],
         ['header' => 'ADMINISTRADOR'],
+
+
+        [
+            'text'       => 'Compras',  
+            'icon'       => 'fas fa-solid fa-business-time',  
+            'submenu' => [     
+    
+            [
+                'text' => 'Materia_Prima',
+                'url' => '#',
+                'icon' => 'fas fa-solid fa-list-check',
+            ],
+
+            [
+                'text' => 'Herramental',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-solid fa-cubes',
+            ],
+
+            [
+                'text' => 'Insumos_Generales',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-solid fa-cubes',
+            ],
+
+            [
+                'text' => 'Servicio_Técnico',
+                'url' => '#',
+                'icon' => 'fas fa-fw fa-solid fa-cubes',
+            ],
+    
+    
+    
+        ], 
+    ],
+
+
+    [
+     'text'       => 'Base de datos',  
+     'icon'       => 'fas fa-database',  
+     'submenu' => [
+
         [
             'text' => 'Productos',
             'route' => 'productos.index',
             // 'url' => 'admin/settings',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ], 
+
+        
+        [
+            'text' => 'Clsificación',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ], 
+
+
+        [
+            'text' => 'Categoria',
+            'route' => 'productos_categoria.index',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ],
+
+        [
+            'text' => 'Subcategoria',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ], 
+
+        [
+            'text' => 'Grupo Subcategorias',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ], 
+
+        [
+            'text' => 'Grupo Conjunto',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes'
+        ], 
+
+    ],
+],
+        
+[
+    'text'       => 'Materia Prima',  
+    'icon'       => 'fas fa-database',  
+    'submenu' => [       
+
+        [
+            'text' => 'Ingreso_mp',
+            'route' => 'materia_prima.index',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
 
         [
-            'text' => 'Materia Prima - Ingresos',
-            'route' => 'materia_prima.index',
+            'text' => 'Salidas_mp',
+            'url' => '#',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
+
+        [
+            'text' => 'Stock_mp',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes',
+        ],
+
+         ], 
+      ],
+
+
+        [
+            'text'       => 'Herramental',  
+            'icon'       => 'fas fa-database',  
+            'submenu' => [       
+        
+                [
+                    'text' => 'Alta_Herramental',
+                    'url' => '#',
+                    'icon' => 'fas fa-fw fa-solid fa-cubes',
+                ],
+        
+                [
+                    'text' => 'Entradas_Herramental',
+                    'url' => '#',
+                    'icon' => 'fas fa-fw fa-solid fa-cubes',
+                ],
+        
+                [
+                    'text' => 'Devolución_Herramental',
+                    'url' => '#',
+                    'icon' => 'fas fa-fw fa-solid fa-cubes',
+                ],
+
+                [
+                    'text' => 'Stock_Herramental',
+                    'url' => '#',
+                    'icon' => 'fas fa-fw fa-solid fa-cubes',
+                ],
+
+            ], 
+        ],
+          
+
+    [
+        'text'       => 'Programación de la Producción',  
+        'icon'       => 'fas fa-database',  
+        'submenu' => [     
+
+        [
+            'text' => 'Listado_OF',
+            'route' => 'listado_de_of.index',
+            'icon' => 'fas fa-fw fa-solid fa-cubes',
+        ],
+
+
+    ], 
+],
+
+[
+    'text'       => 'Registro de Fabricación',  
+    'icon'       => 'fas fa-database',  
+    'submenu' => [     
+
+    [
+        'text' => 'Listado_Fabricación',
+        'route' => 'registro_de_fabricacion.index',
+        'icon' => 'fas fa-fw fa-solid fa-cubes',
+    ],
+
+
+], 
+],
+
+
+
+
+[
+    'text'       => 'Entrega de Productos',  
+    'icon'       => 'fas fa-database',  
+    'submenu' => [     
+
+    
+        [
+            'text' => 'Remito de Entregas',
+            'url' => '#',
+            'icon' => 'fas fa-fw fa-solid fa-cubes',
+        ],
+    
+    
+        [
+        'text' => 'Listado de Entregas',
+        'url' => '#',
+        'icon' => 'fas fa-fw fa-solid fa-cubes',
+    ],
+
+   ],
+], 
+
+
+
+[
+    'text'       => 'No Conformidades',  
+    'icon'       => 'fas fa-database',  
+    'submenu' => [     
+
+    [
+        'text' => 'Nc_Producción',
+        'url' => '#',
+        'icon' => 'fas fa-fw fa-solid fa-cubes',
+    ],
+
+    [
+        'text' => 'Nc_Calidad',
+        'url' => '#',
+        'icon' => 'fas fa-fw fa-solid fa-cubes',
+    ],
+
+
+    [
+        'text' => 'Nc_Cliente',
+        'url' => '#',
+        'icon' => 'fas fa-fw fa-solid fa-cubes',
+    ],
+
+   ],
+], 
+
         
         [
             'text' => 'change_password',
@@ -433,12 +649,13 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    // 'location' => 'vendor/datatables-plugins/dataTables.colReorder.min',
                 ],
                 [
                     'type' => 'js',
@@ -453,7 +670,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -468,7 +685,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -478,7 +695,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

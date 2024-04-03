@@ -23,6 +23,8 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('admin', [HomeController::class, 'index'])->name('admin.index');
     Route::resource('admin/productos', ProductoController::class)->names('admin.products');
+
+    
     // Agrega aquí todas las demás rutas que requieren autenticación
 });
 
@@ -41,6 +43,8 @@ Route::resource('admin/productos', ProductoController::class)->names('admin.prod
 
 Route::resource('mp_ingresos', MpIngresoController::class)->names([
     'index' => 'mp_ingresos.index']);
+
+
 
 
 

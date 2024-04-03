@@ -44,4 +44,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function adminlte_image(){
+    return 'https://picsum.photos/seed/picsum/200/300';
+}
+
+    public function adminlte_desc(){
+        return "Software Engineer";
+    }
+
+    public function adminlte_profile_url(){
+        return 'profile/username'; // Terminar de definir
+    }
+
 }
