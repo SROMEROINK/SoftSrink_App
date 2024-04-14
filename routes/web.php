@@ -48,5 +48,3 @@ Route::resource('registro_de_fabricacion',RegistroDeFabricacionController::class
 
 
 
-
-

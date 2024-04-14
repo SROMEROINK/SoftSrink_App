@@ -5,7 +5,28 @@
 @section('title', 'Fabricación - Registro_De_Fabricación')
 
 @section('content_header')
-    <h1>Registro de Fabricación</h1>  
+    <h2>Registro de Fabricación</h2>  
+    <h1>
+        Cantidad de piezas fabricadas: 
+        <span id="totalCantPiezas" class="total-numero">0</span>
+    </h1>
+
+    <style>
+        /* Estilos personalizados para el título */
+        .titulo-cantidad {
+            font-weight: bold;
+            color: blue; /* Cambia el color del texto a azul */
+        }
+
+        /* Estilos personalizados para el número */
+        .total-numero {
+            background-color: green; /* Cambia el color de fondo a verde */
+            color: white; /* Cambia el color del texto a blanco */
+            padding: 3px 5px; /* Añade un poco de relleno */
+            border-radius: 3px; /* Agrega bordes redondeados */
+        }
+    </style>
+
 @stop
 
 @section('content')
@@ -69,19 +90,6 @@
                             @endif
                         @endforeach
                     </tbody>
-                  <!-- Agrega una fila adicional al final de la tabla para mostrar la suma -->
-                  <tfoot>
-                    <tr>
-                        <!-- Agrega celdas vacías para las columnas previas -->
-                        <td colspan="8" class="danger"></td>
-                        <!-- Agrega una celda para mostrar el total de la suma -->
-                        <td>Total:</td>
-                        <!-- Muestra el resultado de la suma -->
-                        <td id="totalCantPiezas"></td>
-                        <!-- Agrega celdas vacías para las columnas siguientes -->
-                        <td colspan="5"></td>
-                    </tr>
-                </tfoot>
                 </table>
             </div>
         </div>
@@ -90,8 +98,41 @@
 
 @section('css')
     <!-- Agrega los estilos de DataTables aquí -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-@stop
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
+    <style>
+        /* Estilos para centrar los datos en DataTables */
+        #registro_de_fabricacion th,
+        #registro_de_fabricacion td {
+            text-align: center; /* Centra el contenido de las celdas */
+        }
+
+        <style>
+        /* Estilos personalizados para el título */
+        .titulo-cantidad {
+            font-weight: bold;
+            color: blue; /* Cambia el color del texto a azul */
+        }
+
+        /* Estilos personalizados para el número */
+        .total-numero {
+            background-color: green; /* Cambia el color de fondo a verde */
+            color: white; /* Cambia el color del texto a blanco */
+            padding: 3px 5px; /* Añade un poco de relleno */
+            border-radius: 3px; /* Agrega bordes redondeados */
+        }
+
+        /* Establece el ancho de las primeras dos columnas */
+        #registro_de_fabricacion th:nth-child(1),
+        #registro_de_fabricacion td:nth-child(1),
+        #registro_de_fabricacion th:nth-child(2),
+        #registro_de_fabricacion td:nth-child(2) {
+            width: 5px; /* Ancho deseado para las primeras dos columnas */
+        }
+    </style>
+
+
+    </style>
+@endsection
 
 @section('js')
     <!-- Scripts de DataTables aquí -->
@@ -100,65 +141,17 @@
     <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
 
     <script>
-//        $(document).ready(function () {
-//     var table = $('#registro_de_fabricacion').DataTable({
-//         orderCellsTop: true,
-//         fixedHeader: true,
-//         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]] // Define las opciones de longitud de página
-//     });
-
-//     // Clonar la fila de encabezado y agregar filtros
-//     $('#registro_de_fabricacion thead tr').clone(true).appendTo('#registro_de_fabricacion thead');
-
-//     $('#registro_de_fabricacion thead tr:eq(1) th').each(function (i) {
-//         var title = $(this).text();
-//         $(this).html('<input type="text" placeholder="Buscar...' + title + '" />');
-
-//         $('input', this).on('keyup change', function () {
-//             if (table.column(i).search() !== this.value) {
-//                 table.column(i).search(this.value).draw();
-//             }
-//         });
-//     });
-
-//     // Escucha el evento de cambio de filtro en la columna "Nro_OF"
-//     $('#registro_de_fabricacion thead tr:eq(1) th:nth-child(2) input').on('keyup change', function () {
-//         var filtroNroOF = $(this).val(); // Obtiene el valor del filtro aplicado a "Nro_OF"
-//         var totalCantPiezas = 0; // Inicializa la variable para almacenar la suma
-
-//         // Recorre solo las filas visibles de la tabla
-//         table.rows({ search: 'applied' }).every(function () {
-//             // Obtiene los datos de la fila actual como un arreglo
-//             var rowData = this.data();
-
-//             // Verifica si el valor de "Nro_OF" coincide con el filtro aplicado
-//             if (rowData[1] === filtroNroOF || !filtroNroOF) { // Agrega !filtroNroOF para manejar el caso de que no haya filtro
-//                 // Si coincide o no hay filtro, suma el valor de "Cant_Piezas"
-//                 var columnIndex = table.column($(this.node()).index()).index(); // Obtiene el índice de la columna visible
-//                 totalCantPiezas += parseFloat(rowData[columnIndex]); // Utiliza el índice correcto para la columna
-//             }
-//         });
-
-//         // Actualiza el valor total en la fila del pie de página
-//         $('#registro_de_fabricacion tfoot tr td:nth-child(10)').text(totalCantPiezas);
-//     });
-// });
-
-
-
-
-
-
-            $(document).ready(function () {
+        $(document).ready(function () {
             var table = $('#registro_de_fabricacion').DataTable({
                 orderCellsTop: true,
                 fixedHeader: true,
-                pageLength: 10, // Mostrar todos los resultados por defecto
-                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]] // Define las opciones de longitud de página
+                // scrollY: '600px', // Altura del área de desplazamiento vertical
+                pageLength: 50, // Mostrar solo 10 resultados por defecto
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
             });
 
             // Clonar la fila de encabezado y agregar filtros
-            $('#registro_de_fabricacion thead tr').clone(true).appendTo('#registro_de_fabricacion thead');
+            $('#registro_de_fabricacion thead tr').clone(true).prependTo('#registro_de_fabricacion thead');
 
             $('#registro_de_fabricacion thead tr:eq(1) th').each(function (i) {
                 var title = $(this).text();
@@ -167,8 +160,6 @@
                 $('input', this).on('keyup change', function () {
                     if (table.column(i).search() !== this.value) {
                         table.column(i).search(this.value).draw();
-                         // Mostrar todos los resultados después de aplicar el filtro
-                        table.page.len(-1).draw();
                     }
                 });
             });
