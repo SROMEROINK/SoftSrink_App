@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Fabricacion;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Listado_de_OF\Listado_OF;
-use App\Models\Productos\Producto;
+use App\Models\Listado_OF;
+use App\Models\Producto;
 
 class RegistroDeFabricacion extends Model
 {

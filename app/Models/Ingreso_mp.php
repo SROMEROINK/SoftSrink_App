@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Materia_Prima;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Proveedores\Proveedor; // Importa el modelo correcto
+use App\Models\Proveedor; // Importa el modelo correcto
 
 class Ingreso_mp extends Model
 {

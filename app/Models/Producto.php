@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Productos;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -49,14 +49,14 @@ class Producto extends Model
 
 public function grupoConjuntos()
 {
-    return $this->belongsTo('App\Models\Productos\GrupoConjuntos', 'Id_Prod_Codigo_Conjuntos', 'Id_GrupoConjuntos');
+    return $this->belongsTo(GrupoConjuntos::class, 'Id_Prod_Codigo_Conjuntos', 'Id_GrupoConjuntos');
 }
 
     public function cliente()
 {
     // La clave foránea en Producto: 'Prod_CliId'
     // La clave primaria en Cliente: 'Cli_Id'
-    return $this->belongsTo('App\Models\Clientes\Cliente', 'Prod_CliId', 'Cli_Id');
+    return $this->belongsTo(Cliente::class, 'Prod_CliId', 'Cli_Id');
 }
 
 

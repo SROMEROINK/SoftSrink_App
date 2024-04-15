@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\Listado_de_OF;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Productos\Producto;
-use App\Models\Materia_Prima\Ingreso_mp;
+use App\Models\Producto;
+use App\Models\Ingreso_mp;
 
 
 class Listado_OF extends Model
@@ -41,7 +41,7 @@ class Listado_OF extends Model
         {
             // La clave foránea en Listado_OF: 'Producto_Id'
             // La clave primaria en producto: 'Id_Producto'
-            return $this->belongsTo(Producto::class, 'Producto_Id', 'Id_Producto'); // Cambia el nombre del modelo a Producto y especifica correctamente el namespace
+            return $this->belongsTo('App\Models\Producto', 'Producto_Id', 'Id_Producto'); // Cambia el nombre del modelo a Producto y especifica correctamente el namespace
         }
 
 

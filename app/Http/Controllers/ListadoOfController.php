@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Listado_de_OF\Listado_OF;
+use App\Models\Listado_OF;
 
 class ListadoOfController extends Controller
 {

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Fabricacion\RegistroDeFabricacion;
+use App\Models\RegistroDeFabricacion;
 
 class RegistroDeFabricacionController extends Controller
 {

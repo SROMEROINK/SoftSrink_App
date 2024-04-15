@@ -414,13 +414,13 @@ return [
 
         [
             'text' => 'Ingreso_mp',
-            'route' => 'materia_prima.index',
+            'route' => 'materia_prima_ingresos.index',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
 
         [
             'text' => 'Salidas_mp',
-            'url' => '#',
+            'route' => 'materia_prima_salidas.index',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
 

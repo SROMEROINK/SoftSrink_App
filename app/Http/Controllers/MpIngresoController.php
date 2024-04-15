@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Materia_Prima\Ingreso_mp;
+use App\Models\Ingreso_mp;
 
 class MpIngresoController extends Controller
 {
@@ -16,7 +16,7 @@ class MpIngresoController extends Controller
         $ingresos_mp = Ingreso_mp::paginate(10); // Esto paginará los resultados, mostrando 10 Ingresos_mp de por página
     
         // Pasar los Ingresos_mp paginados a la vista correspondiente
-        return view('Materia_Prima.index', compact('ingresos_mp'));
+        return view('Materia_Prima_Ingresos.index', compact('ingresos_mp'));
     }
 
     /**

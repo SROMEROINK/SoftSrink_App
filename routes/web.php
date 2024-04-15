@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MpIngresoController;
+use App\Http\Controllers\MpSalidaController;
 use App\Http\Controllers\ListadoOfController;
 use App\Http\Controllers\ProductoCategoriaController;
 use App\Http\Controllers\RegistroDeFabricacionController;
@@ -14,7 +15,7 @@ use App\Http\Controllers\ListadoEntregaProductoController;
 
 // Ruta por defecto al iniciar la app
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
@@ -25,7 +26,8 @@ Auth::routes();
 // Rutas hacia el HomeController
 Route::get('/home', [AdminHomeController::class, 'index'])->name('adminHome');
 Route::get('/admin', [AdminHomeController::class, 'index'])->name('admin.index');
-Route::get('/materia_prima', [MpIngresoController::class, 'index'])->name('materia_prima.index');
+Route::get('/materia_prima_ingresos', [MpIngresoController::class, 'index'])->name('materia_prima_ingresos.index');
+Route::get('/materia_prima_salidas', [MpSalidaController::class, 'index'])->name('materia_prima_salidas.index');
 Route::get('/listado_de_of', [ListadoOfController::class, 'index'])->name('listado_de_of.index'); 
 Route::get('/productos_categoria',[ProductoCategoriaController::class,'index'])->name('productos_categoria.index');
 Route::get('/registro_de_fabricacion',[RegistroDeFabricacionController::class,'index'])->name('registro_de_fabricacion.index');

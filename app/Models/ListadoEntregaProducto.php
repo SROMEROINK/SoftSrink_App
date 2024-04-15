@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Models\Entrega_Productos;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Productos\Producto;
-use App\Models\Listado_de_OF\Listado_OF;
-use App\Models\Materia_Prima\Ingreso_mp;
-use App\Models\Proveedores\Proveedor;
+use App\Models\Producto;
+use App\Models\Listado_OF;
+use App\Models\Ingreso_mp;
+use App\Models\Proveedor;
 
 class ListadoEntregaProducto extends Model
 {
     use HasFactory;
 
     protected $table = 'listado_entregas_productos';
-    protected $primaryKey = 'Id_OF';
+    protected $primaryKey = 'Id_List_Entreg_Prod';
     protected $fillable = [
-        "Id_List_Entreg_Prod",
         "Id_OF",
         "Nro_Parcial_Calidad",
         "Cant_Piezas_Entregadas",

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\ListadoEntregaProducto;
+use App\Models\MpSalidas;
 
-class ListadoEntregaProductoController extends Controller
+class MpSalidaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,11 +13,11 @@ class ListadoEntregaProductoController extends Controller
     public function index(Request $request)
     {
         // Obtener el valor del filtro de la solicitud
-        $filtroNroOF_entregas = $request->query('filtroNroOF_entregas');
-        $entrega_productos = ListadoEntregaProducto::with('listado_of.producto')->get();
+        $filtroNroOF = $request->query('filtroNroOF');
+        $salidas_mp = MpSalidas::with('listado_of.producto')->get();
     
-        // Pasar los Ingresos_mp paginados a la vista correspondiente
-        return view('Entregas_Productos.index', compact('entrega_productos','filtroNroOF_entregas'));
+        
+        return view('Materia_Prima_Salidas.index', compact('salidas_mp','filtroNroOF'));
     }
 
     /**
