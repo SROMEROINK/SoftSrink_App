@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Listado_de_OF\Listado_OF;
 use App\Models\Productos\Producto;
 
-class Registro_de_Fabricacion extends Model
+class RegistroDeFabricacion extends Model
 {
     use HasFactory;
     protected $table = 'registro_de_fabricacion';

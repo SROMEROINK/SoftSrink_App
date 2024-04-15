@@ -48,7 +48,7 @@
                                 <td>{{$listado_of ->Cant_Fabricacion}}</td>
                                 <td>{{$listado_of ->Nro_Maquina }}</td>
                                 <td>{{$listado_of ->Familia_Maquinas }}</td>
-                                <td>{{ optional($listado_of  ->Ingreso_mp)->Nro_Ingreso_MP}}</td>
+                                <td>{{$listado_of ->Ingreso_mp->Nro_Ingreso_MP}}</td>
                                 <td>{{$listado_of ->Pedido_de_MP }}</td>
                                 <td>{{$listado_of ->Tiempo_Pieza_Real }}</td>
                                 <td>{{$listado_of ->Tiempo_Pieza_Aprox}}</td>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Fabricacion\Registro_de_Fabricacion;
+use App\Models\Fabricacion\RegistroDeFabricacion;
 
 class RegistroDeFabricacionController extends Controller
 {
@@ -14,9 +14,9 @@ class RegistroDeFabricacionController extends Controller
     {
         // Obtener el valor del filtro de la solicitud
         $filtroNroOF = $request->query('filtroNroOF');
-        $registros_fabricacion = Registro_de_Fabricacion::with('listado_of.producto')->get();
+        $registros_fabricacion = RegistroDeFabricacion::with('listado_of.producto')->get();
     
-        // Pasar los Ingresos_mp paginados a la vista correspondiente
+        // Pasar los registros de fabricacón paginados a la vista correspondiente
         return view('Registro_de_Fabricacion.index', compact('registros_fabricacion','filtroNroOF'));
     }
     /**

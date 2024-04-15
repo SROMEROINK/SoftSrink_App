@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Entrega_Productos\ListadoEntregaProducto;
 
-class ListadoEntregasProductoController extends Controller
+class ListadoEntregaProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Obtener el valor del filtro de la solicitud
+        $filtroNroOF_entregas = $request->query('filtroNroOF_entregas');
+        $entrega_productos = ListadoEntregaProducto::with('listado_of.producto')->get();
+    
+        // Pasar los Ingresos_mp paginados a la vista correspondiente
+        return view('Entregas_Productos.index', compact('entrega_productos','filtroNroOF_entregas'));
     }
 
     /**

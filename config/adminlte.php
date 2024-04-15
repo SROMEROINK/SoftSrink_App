@@ -507,14 +507,14 @@ return [
 
     
         [
-            'text' => 'Remito de Entregas',
-            'url' => '#',
+            'text' => 'Listado de Entregas',
+            'route' => 'entregas_productos.index',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
     
     
         [
-        'text' => 'Listado de Entregas',
+        'text' => 'Remito de Entregas',
         'url' => '#',
         'icon' => 'fas fa-fw fa-solid fa-cubes',
     ],

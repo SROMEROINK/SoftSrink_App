@@ -7,6 +7,8 @@ use App\Http\Controllers\MpIngresoController;
 use App\Http\Controllers\ListadoOfController;
 use App\Http\Controllers\ProductoCategoriaController;
 use App\Http\Controllers\RegistroDeFabricacionController;
+use App\Http\Controllers\ListadoEntregaProductoController;
+
 
 
 
@@ -27,6 +29,7 @@ Route::get('/materia_prima', [MpIngresoController::class, 'index'])->name('mater
 Route::get('/listado_de_of', [ListadoOfController::class, 'index'])->name('listado_de_of.index'); 
 Route::get('/productos_categoria',[ProductoCategoriaController::class,'index'])->name('productos_categoria.index');
 Route::get('/registro_de_fabricacion',[RegistroDeFabricacionController::class,'index'])->name('registro_de_fabricacion.index');
+Route::get('/entregas_productos',[ListadoEntregaProductoController::class,'index'])->name('entregas_productos.index');
 
 
 // Rutas para el CRUD de productos en el área general (Si existe)
@@ -43,6 +46,8 @@ Route::resource('mp_ingresos', MpIngresoController::class);
 Route::resource('categoria', ProductoCategoriaController::class);
 
 Route::resource('registro_de_fabricacion',RegistroDeFabricacionController::class);
+
+Route::resource('listado_de_entregas_productos',ListadoEntregaProductoController::class);
 
 
 

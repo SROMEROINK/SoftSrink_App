@@ -50,7 +50,7 @@ class Listado_OF extends Model
         {
             // La clave foránea en listado_of: 'MP_Id'
             // La clave primaria en ingreso_mp: 'Id_MP'
-            return $this->belongsTo(Ingreso_mp::class, 'MP_Id', 'Id_MP'); // Cambia el nombre del modelo a ingreso_mp y especifica correctamente el namespace
+            return $this->belongsTo(Ingreso_mp::class, 'MP_Id', 'Nro_Ingreso_MP'); // Cambia el nombre del modelo a ingreso_mp y especifica correctamente el namespace
         }
     }
     
