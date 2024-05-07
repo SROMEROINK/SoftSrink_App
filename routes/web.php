@@ -32,7 +32,10 @@ Route::get('/listado_de_of', [ListadoOfController::class, 'index'])->name('lista
 Route::get('/productos_categoria',[ProductoCategoriaController::class,'index'])->name('productos_categoria.index');
 Route::get('/registro_de_fabricacion',[RegistroDeFabricacionController::class,'index'])->name('registro_de_fabricacion.index');
 Route::get('/entregas_productos',[ListadoEntregaProductoController::class,'index'])->name('entregas_productos.index');
+Route::get('/registro_de_fabricacion/carga', [RegistroDeFabricacionController::class,'carga'])->name('carga.fabricacion');
 
+// Dentro de web.php
+Route::get('/listado-of/get-id-producto/{nroOf}', [ListadoOfController::class, 'getIdProductoPorNroOf']);
 
 // Rutas para el CRUD de productos en el área general (Si existe)
 Route::resource('productos', ProductoController::class);
@@ -50,6 +53,14 @@ Route::resource('categoria', ProductoCategoriaController::class);
 Route::resource('registro_de_fabricacion',RegistroDeFabricacionController::class);
 
 Route::resource('listado_de_entregas_productos',ListadoEntregaProductoController::class);
+
+Route::post('registro_de_fabricacion/carga', [RegistroDeFabricacionController::class, 'storeCarga'])->name('carga.fabricacion.submit');
+
+// Rutas para pruebas
+Route::get('/test-insert', [RegistroDeFabricacionController::class, 'testInsert']);
+
+
+
 
 
 

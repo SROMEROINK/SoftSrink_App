@@ -10,12 +10,31 @@ class ListadoOfController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $listados_of = Listado_OF::all();
+        // Obtener el valor del filtro de la solicitud
+        $filtroNroOF = $request->query('filtroNroOF');
     
-        // Pasar los Ingresos_mp paginados a la vista correspondiente
-        return view('Listado_de_OF.index', compact('listados_of'));
+        if ($filtroNroOF) {
+            $listados_of = Listado_OF::where('Nro_OF', $filtroNroOF)->get();
+        } else {
+            $listados_of = Listado_OF::all();
+        }
+    
+        // Pasar los resultados a la vista
+        return view('Listado_de_OF.index', compact('listados_of', 'filtroNroOF'));
+    }
+
+
+
+    public function getIdProductoPorNroOf($nroOf)
+    {
+        try {
+            $listado_of = Listado_OF::where('Nro_OF', $nroOf)->firstOrFail();
+            return response()->json(['success' => true, 'id_producto' => $listado_of->Producto_Id]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Producto no encontrado.']);
+        }
     }
 
     /**

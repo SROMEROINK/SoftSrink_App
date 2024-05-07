@@ -10,6 +10,7 @@
         Cantidad de piezas fabricadas: 
         <span id="totalCantPiezas" class="total-numero">0</span>
     </h1>
+    <a href="{{ route('carga.fabricacion') }}" class="btn btn-success">Ir a Carga de Producción</a>
 
     <style>
         /* Estilos personalizados para el título */
@@ -58,9 +59,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                             @php
+                            @php
                                 $totalCantPiezas = 0; // Inicializa la variable para almacenar la suma
-                             @endphp
+                            @endphp
                                     @foreach ($registros_fabricacion as $registro_fabricacion)
                                     <!-- Verifica si el filtro está definido o si coincide con el Nro_OF -->
                                     @if (!isset($filtroNroOF) || $registro_fabricacion->listado_of->Nro_OF == $filtroNroOF)
