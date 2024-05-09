@@ -374,7 +374,7 @@
 
             
             [
-                'text' => 'Clsificación',
+                'text' => 'Clasificación',
                 'url' => '#',
                 'icon' => 'fas fa-fw fa-solid fa-cubes'
             ], 
@@ -489,13 +489,13 @@
 
         [
             'text' => 'Listado_Fabricación',
-            'route' => 'registro_de_fabricacion.index',
+            'route' => 'fabricacion.index',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
 
         [
             'text' => 'Carga_Fabricación',
-            'route' => 'carga.fabricacion',
+            'route' => 'fabricacion.create',
             'icon' => 'fas fa-fw fa-solid fa-cubes',
         ],
 

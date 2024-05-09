@@ -13,7 +13,7 @@
 @section('content')
 
 
-    <form method="post" action="{{ route('carga.fabricacion.submit') }}">
+    <form method="post" action="{{ route('fabricacion.store') }}">
         @csrf
         <table class="table table-bordered custom-font centered-form"  id="tablaProduccion">
             <thead>
@@ -21,6 +21,7 @@
                     <th>N° OF</th>
                     <th>Id_Producto</th>
                     <th>N° de Parcial</th>
+                    <th>Nro_OF_Parcial</th>
                     <th>Cant.Piezas</th>
                     <th>Fecha de Fabricación</th>
                     <th>Horario</th>
@@ -62,6 +63,7 @@
                             <td><input type="number" name="nro_of[]"></td>
                             <td><input type="number" name="Id_Producto[]"></td>
                             <td><input type="number" name="nro_parcial[]"></td>
+                            <td><input type="text" name="Nro_OF_Parcial[]"></td>
                             <td><input type="number" name="cant_piezas[]"></td>
                             <td><input type="date" name="fecha_fabricacion[]"></td>
                             <td>
@@ -128,31 +130,40 @@
         });
 
         $('form').submit(function(event) {
-    event.preventDefault();
-    $(this).find(':input:disabled').prop('disabled', false);
-    var formData = $(this).serialize();
+    event.preventDefault(); // Evitar el envío tradicional del formulario
+    var formData = $(this).serialize(); // Serializar los datos del formulario
 
     $.ajax({
         type: 'POST',
         url: $(this).attr('action'),
         data: formData,
+        dataType: 'json', // Esperando una respuesta JSON
         success: function(response) {
-            // Utiliza SweetAlert2 para mostrar un mensaje de éxito
             Swal.fire({
-                icon: 'success',
-                title: '¡Datos guardados correctamente!',
-                text: 'Los datos se han guardado con éxito.'
-            }).then(function() {
-                // Opcional: recargar la página o redirigir
-                location.reload(); 
+                title: response.success ? 'Éxito' : 'Error',
+                text: response.message,
+                icon: response.success ? 'success' : 'error',
+                confirmButtonColor: response.success ? '#3085d6' : '#d33', // Azul para éxito, rojo para error
+                confirmButtonText: response.success ? 'OK' : 'Entendido'
+            // }).then(function() {
+            //     if (response.success) {
+            //         location.reload(); // Recargar la página si el registro fue exitoso
+            //     }
             });
         },
         error: function(xhr) {
-            // Utiliza SweetAlert2 para mostrar un mensaje de error
+            var response = JSON.parse(xhr.responseText);
+            var errorString = '';
+            $.each(response.errors, function(key, value) {
+                errorString += value + '<br/>';
+            });
+
             Swal.fire({
+                title: 'Error de Validación',
+                html: errorString,
                 icon: 'error',
-                title: 'Error al guardar',
-                text: 'No se pudo guardar la información: ' + xhr.statusText
+                confirmButtonColor: '#d33', // Rojo para errores
+                confirmButtonText: 'Corregir'
             });
         }
     });
@@ -179,6 +190,7 @@
             });
         }
     }
+    
 
     // Evento para detectar el cambio en el campo de N° OF
     $(document).on('change', 'input[name="nro_of[]"]', function() {
@@ -191,5 +203,21 @@
     $(".alert").fadeTo(2000, 500).slideUp(500, function() {
             $(".alert").slideUp(500);
         });
+
+        $(document).on('change', 'input[name="nro_of[]"], input[name="nro_parcial[]"]', function() {
+    var $fila = $(this).closest('tr');
+    var nroOf = $fila.find('input[name="nro_of[]"]').val();
+    var nroParcial = $fila.find('input[name="nro_parcial[]"]').val();
+    
+    console.log("Nro OF:", nroOf); // Deberías ver el número de OF en la consola al cambiar el valor
+    console.log("Nro Parcial:", nroParcial); // Deberías ver el número de Parcial en la consola al cambiar el valor
+
+    if(nroOf && nroParcial) {
+        var nroOfParcial = nroOf + '/' + nroParcial;
+        $fila.find('input[name="Nro_OF_Parcial[]"]').val(nroOfParcial);
+    } else {
+        $fila.find('input[name="Nro_OF_Parcial[]"]').val('');
+    }
+});  
 </script>
 @stop

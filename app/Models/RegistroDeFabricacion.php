@@ -18,6 +18,7 @@ namespace App\Models;
             "Nro_OF",
             "Id_Producto",
             "Nro_Parcial",
+            "Nro_OF_Parcial",
             "Cant_Piezas",
             "Fecha_Fabricacion",
             "Horario",

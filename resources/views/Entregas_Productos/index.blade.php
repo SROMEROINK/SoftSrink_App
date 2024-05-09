@@ -57,9 +57,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                             @php
+                            @php
                                 $totalCantPiezas = 0; // Inicializa la variable para almacenar la suma
-                             @endphp
+                            @endphp
                                     @foreach ($entrega_productos as $entrega_producto)
                                     <!-- Verifica si el filtro está definido o si coincide con el Nro_OF -->
                                     @if (!isset($filtroNroOF_entregas) || $entrega_producto->listado_of->Nro_OF == $filtroNroOF_entregas)

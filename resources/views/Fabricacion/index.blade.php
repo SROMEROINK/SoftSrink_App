@@ -10,7 +10,7 @@
         Cantidad de piezas fabricadas: 
         <span id="totalCantPiezas" class="total-numero">0</span>
     </h1>
-    <a href="{{ route('carga.fabricacion') }}" class="btn btn-success">Ir a Carga de Producción</a>
+    <a href="{{ route('fabricacion.create') }}" class="btn btn-success">Ir a Carga de Producción</a>
 
     <style>
         /* Estilos personalizados para el título */
@@ -52,10 +52,7 @@
                             <th>Horario</th>
                             <th>Nombre_Operario</th>
                             <th>Turno</th>
-                            <th>Cant_Horas_Extras</th>
-                            <th>Total_Mts_MP</th>
-                            <th>Precio_Unitario_Pieza</th>
-                            <th>Total_Fabricado_ARS</th>            
+                            <th>Cant_Horas_Extras</th>           
                         </tr>
                     </thead>
                     <tbody>
@@ -80,9 +77,6 @@
                                 <td>{{$registro_fabricacion ->Nombre_Operario }}</td>
                                 <td>{{$registro_fabricacion ->Turno }}</td>
                                 <td>{{$registro_fabricacion ->Cant_Horas_Extras }}</td>
-                                <td>{{$registro_fabricacion ->Total_Mts_MP }}</td>
-                                <td>{{$registro_fabricacion ->Precio_Unitario_Pieza}}</td>
-                                <td>{{$registro_fabricacion ->Total_Fabricado_ARS }}</td>
                                 </td>
                                 @php
                                 $totalCantPiezas += $registro_fabricacion->Cant_Piezas;
