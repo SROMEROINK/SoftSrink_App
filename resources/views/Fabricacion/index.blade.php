@@ -1,4 +1,4 @@
-{{-- resources/views/Materia_Prima/index.blade.php --}}
+{{-- resources\views\Fabricacion\index.blade.php --}}
 
 @extends('adminlte::page')
 

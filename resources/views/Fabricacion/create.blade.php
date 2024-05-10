@@ -1,3 +1,5 @@
+{{-- resources\views\Fabricacion\create.blade.php --}}
+
 @extends('adminlte::page')
 
 @section('title', 'Carga de Producción')
@@ -90,21 +92,20 @@
 
         $(document).on('change', '.horario', function() {
             var $row = $(this).closest('tr');
-            
             var horarioValue = $(this).val();
             var $operarioSelect = $row.find('.operario');
             var $turnoInput = $row.find('.turno');
             var $cantHorasInput = $row.find('input[name="cant_horas[]"]');
 
-            $operarioSelect.empty();
-            $turnoInput.val("");
-            $cantHorasInput.val("");
 
             if (horarioValue === "H.Normales") {
                 $turnoInput.val("Mañana");
                 $cantHorasInput.val(8);
-                $operarioSelect.prop('disabled', true);
+                $operarioSelect.empty().append(new Option(" '' ", " '' ")).val(" '' ").prop('disabled', false); // Establece "Todos" y deshabilita el select
             } else {
+
+                // Resto de la lógica para habilitar y configurar el select según otros horarios
+                $operarioSelect.prop('disabled', false).empty();
                 var opcionesOperario = {
                     "H.Extras": [{ value: "B.Abtt", text: "B.Abtt" },{ value: "G.Silva", text: "G.Silva" }, { value: "T.Berraz", text: "T.Berraz" }],
                     "H.Extras/Sábados": [{ value: "B.Abtt", text: "B.Abtt" },{ value: "G.Silva", text: "G.Silva" }, { value: "T.Berraz", text: "T.Berraz" }]
@@ -145,10 +146,10 @@
                 icon: response.success ? 'success' : 'error',
                 confirmButtonColor: response.success ? '#3085d6' : '#d33', // Azul para éxito, rojo para error
                 confirmButtonText: response.success ? 'OK' : 'Entendido'
-            // }).then(function() {
-            //     if (response.success) {
-            //         location.reload(); // Recargar la página si el registro fue exitoso
-            //     }
+                }).then(function() {
+                    if (response.success) {
+                        location.reload(); // Recargar la página si el registro fue exitoso
+                    }
             });
         },
         error: function(xhr) {
@@ -187,6 +188,8 @@
                 error: function(xhr, status, error) {
                     alert('Error al buscar el ID del producto: ' + error);
                 }
+
+                
             });
         }
     }
