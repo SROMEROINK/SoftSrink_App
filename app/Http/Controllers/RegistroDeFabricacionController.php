@@ -94,12 +94,18 @@
                     $registro->Nombre_Operario = $request->operario[$index] ?? null; // Utiliza el operario enviado o null si no se envía nada
                 }
 
-                if ($registroExistente = RegistroDeFabricacion::where('Nro_OF_Parcial', $Nro_OF_Parcial)->first()) {
-                    // Redirigir a la página de edición con un mensaje de error
-                    return redirect()->route('fabricacion.edit', $registroExistente->Id_OF)->with('error', 'El número de OF parcial ya ha sido registrado. Redirigiendo a la entrada existente...');
-                }
+                $registroExistente = RegistroDeFabricacion::where('Nro_OF_Parcial', $Nro_OF_Parcial)->first();
+            if ($registroExistente) {
+                // Si existe un registro con el mismo Nro_OF_Parcial, redirige a la página de edición
+                return redirect()->route('fabricacion.edit', ['fabricacion' => $registroExistente->Id_OF])
+                                            ->with('warning', 'El número de OF parcial ya ha sido registrado. Redirigiendo a la entrada existente...');
+                                            return response()->json(['success' => false, 'message' => 'El número de OF parcial ya ha sido registrado.', 'id' => $registroExistente->Id_OF], 409);
+                                        }
 
-                $registro->save();
+        // Crear el nuevo registro si no existe
+        $registro = new RegistroDeFabricacion();
+        // Establecer propiedades del modelo...
+        $registro->save();
             }
         }
         
@@ -111,19 +117,34 @@
       /**
          * Display the specified resource.
          */
-        public function show(string $Id_OF) // Mostrar un registro de fabricación
-        {
-            $registro_fabricacion = RegistroDeFabricacion::find($Id_OF);
-            return view('Fabricacion.show', compact('registro_fabricacion'));
-        }
+                    public function showByNroOF($nroOF)
+            {
+                $registros = RegistroDeFabricacion::where('Nro_OF', $nroOF)->orderBy('Nro_Parcial', 'asc')->get();
+
+                // Agrega una verificación para asegurarte de que realmente se están recuperando datos.
+                if ($registros->isEmpty()) {
+                    return redirect()->back()->with('error', 'No se encontraron registros con ese Número de OF.');
+                }
+
+                return view('Fabricacion.show', compact('registros'));
+            }
+
 
         /**
          * Show the form for editing the specified resource.
          */
-        public function edit($id_OF) {
-            $registro_fabricacion = RegistroDeFabricacion::where('Id_OF', $id_OF)->firstOrFail();
+
+        //Alternativa que debería funcionar (2024-05-11)
+        // public function edit(RegistroDeFabricacion $fabricacion) {
+        //     return view('Fabricacion.edit', compact('fabricacion'));
+        // }
+
+        public function edit($id) {
+            $registro_fabricacion = RegistroDeFabricacion::findOrFail($id);
             return view('Fabricacion.edit', compact('registro_fabricacion'));
         }
+        
+        
         /**
          * Update the specified resource in storage.
          */
@@ -146,13 +167,27 @@
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy(string $Id_OF) // Eliminar un registro de fabricación
-        {
-            $registro_fabricacion = RegistroDeFabricacion::find($Id_OF);
-            $registro_fabricacion->delete();
-            return redirect()->route('fabricacion.index')->with('success', 'Registro eliminado correctamente.');
+        public function destroy(string $Id_OF)
+{
+    try {
+        $registro_fabricacion = RegistroDeFabricacion::findOrFail($Id_OF);
+        $nroOF = $registro_fabricacion->Nro_OF; // Número de OF.
+        $registro_fabricacion->delete();
+
+        // Verifica si hay más registros con el mismo Nro_OF.
+        $remaining = RegistroDeFabricacion::where('Nro_OF', $nroOF)->count();
+
+        if ($remaining > 0) {
+            // Si todavía hay registros, redirige a la vista show.
+            return response()->json(['status' => 'success', 'message' => 'Registro eliminado correctamente.', 'redirect' => route('fabricacion.showByNroOF', ['nroOF' => $nroOF])]);
+        } else {
+            // Si no hay más registros, redirige a la vista create.
+            return response()->json(['status' => 'success', 'message' => 'Todos los registros eliminados. Creando nuevo.', 'redirect' => route('fabricacion.create')]);
         }
-        
+    } catch (\Exception $e) {
+        return response()->json(['status' => 'error', 'message' => 'Error al eliminar el registro.']);
     }
-    
+}
+
+}
 ?>

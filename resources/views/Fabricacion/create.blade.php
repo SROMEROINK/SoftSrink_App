@@ -30,6 +30,7 @@
                     <th>Operario</th>
                     <th>Turno</th>
                     <th>Cant. de Horas</th>
+                    <th>Editar OF</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -62,7 +63,7 @@
 
         // Agregar una fila base a la tabla
         var filaBase = `<tr>
-                            <td><input type="number" name="nro_of[]"></td>
+                            <td><input type="number" class="nro_of_input" name="nro_of[]" required></td>
                             <td><input type="number" name="Id_Producto[]"></td>
                             <td><input type="number" name="nro_parcial[]"></td>
                             <td><input type="text" name="Nro_OF_Parcial[]"></td>
@@ -83,12 +84,29 @@
                             </td>
                             <td><input type="text" class="form-control turno" name="turno[]" readonly></td>
                             <td><input type="number" name="cant_horas[]" readonly></td>
+
+                            {{-- Botón para ir a la vista de edición de la OF --}}
+                            <td><button type="button" id="edit_of" class="btn btn-info">Editar OF</button></td>
+
                             <td><button type="button" class="btn btn-danger eliminar">Eliminar</button></td>
                         </tr>`;
 
         $('#agregarFila').click(function() {
             $('#tablaProduccion tbody').append(filaBase);
         });
+
+        $('#tablaProduccion').on('click', '#edit_of', function() {
+            var nroOF = $(this).closest('tr').find('input[name="nro_of[]"]').val();
+            window.location.href = `/fabricacion/show/${nroOF}`;
+        });
+
+
+
+
+        // $(document).on('click', '#edit_of', function() {
+        //     // Redirigir a la vista de edición de la OF
+        //     window.location.href = '/fabricacion/' + $(this).closest('tr').find('.nro_of_input').val() + '/edit';
+        // });
 
         $(document).on('change', '.horario', function() {
             var $row = $(this).closest('tr');
@@ -165,6 +183,11 @@
                 icon: 'error',
                 confirmButtonColor: '#d33', // Rojo para errores
                 confirmButtonText: 'Corregir'
+            }).then(function() {
+                if (xhr.status === 409 && response.id) {
+                    // Redirigir para editar el registro existente
+                    window.location.href = '/fabricacion/' + response.id + '/edit';
+                }
             });
         }
     });
@@ -194,6 +217,7 @@
         }
     }
     
+
 
     // Evento para detectar el cambio en el campo de N° OF
     $(document).on('change', 'input[name="nro_of[]"]', function() {

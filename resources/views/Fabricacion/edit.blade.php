@@ -5,11 +5,18 @@
 @section('title', 'Editar Registro')
 
 @section('content_header')
-    <h1>Actualizar OF</h1>
+    <h1>Actualizar OF {{ $registro_fabricacion->Nro_OF }}</h1>
 @stop
 
 @section('content')
-    <form action="{{ route('fabricacion.update', $registro_fabricacion->id_OF) }}" method="POST">
+    <!-- Mostrar mensaje de advertencia si existe en la sesión -->
+    @if(session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
+        </div>
+    @endif
+
+    <form action="{{ route('fabricacion.update', $registro_fabricacion->Id_OF) }}" method="POST">
     @csrf
     @method('PUT')
     <div class="form-group">

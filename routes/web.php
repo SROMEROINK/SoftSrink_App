@@ -1,5 +1,5 @@
 <?php
-
+//routes\web.php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\ProductoController;
@@ -26,6 +26,8 @@ Route::get('/materia_prima_ingresos', [MpIngresoController::class, 'index'])->na
 Route::get('/materia_prima_salidas', [MpSalidaController::class, 'index'])->name('materia_prima_salidas.index');
 Route::get('/listado_de_of', [ListadoOfController::class, 'index'])->name('listado_de_of.index'); 
 Route::get('/productos_categoria',[ProductoCategoriaController::class,'index'])->name('productos_categoria.index');
+
+
     
 
 Route::get('/entregas_productos',[ListadoEntregaProductoController::class,'index'])->name('entregas_productos.index');
@@ -42,8 +44,14 @@ Route::resource('mp_ingresos', MpIngresoController::class);
 
 Route::resource('categoria', ProductoCategoriaController::class);
 
+
+
+Route::delete('/fabricacion/{id}', [RegistroDeFabricacionController::class, 'destroy'])->name('fabricacion.destroy');
+
+Route::get('fabricacion/show/{nroOF}', [RegistroDeFabricacionController::class, 'showByNroOF'])->name('fabricacion.showByNroOF');
 // Crea todas las rutas necesarias para CRUD: index, create, store, show, edit, update, delete
 Route::resource('fabricacion', RegistroDeFabricacionController::class);
+
 
 // Route::resource('fabricacion', RegistroDeFabricacionController::class)->except(['create']);
 // Route::get('fabricacion/carga', [RegistroDeFabricacionController::class, 'loadProductionForm'])->name('fabricacion.loadProductionForm');
