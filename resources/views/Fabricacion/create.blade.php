@@ -63,7 +63,7 @@
 
         // Agregar una fila base a la tabla
         var filaBase = `<tr>
-                            <td><input type="number" class="nro_of_input" name="nro_of[]" required></td>
+                            <td><input type="number" class="nro_of_input" name="nro_of[]"></td>
                             <td><input type="number" name="Id_Producto[]"></td>
                             <td><input type="number" name="nro_parcial[]"></td>
                             <td><input type="text" name="Nro_OF_Parcial[]"></td>
@@ -86,7 +86,7 @@
                             <td><input type="number" name="cant_horas[]" readonly></td>
 
                             {{-- Botón para ir a la vista de edición de la OF --}}
-                            <td><button type="button" id="edit_of" class="btn btn-info">Editar OF</button></td>
+                            <td><button type="button" id="edit_of" class="btn btn-info">Editar</button></td>
 
                             <td><button type="button" class="btn btn-danger eliminar">Eliminar</button></td>
                         </tr>`;
@@ -99,14 +99,6 @@
             var nroOF = $(this).closest('tr').find('input[name="nro_of[]"]').val();
             window.location.href = `/fabricacion/show/${nroOF}`;
         });
-
-
-
-
-        // $(document).on('click', '#edit_of', function() {
-        //     // Redirigir a la vista de edición de la OF
-        //     window.location.href = '/fabricacion/' + $(this).closest('tr').find('.nro_of_input').val() + '/edit';
-        // });
 
         $(document).on('change', '.horario', function() {
             var $row = $(this).closest('tr');

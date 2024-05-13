@@ -94,26 +94,16 @@
                     $registro->Nombre_Operario = $request->operario[$index] ?? null; // Utiliza el operario enviado o null si no se envía nada
                 }
 
-                $registroExistente = RegistroDeFabricacion::where('Nro_OF_Parcial', $Nro_OF_Parcial)->first();
-            if ($registroExistente) {
-                // Si existe un registro con el mismo Nro_OF_Parcial, redirige a la página de edición
-                return redirect()->route('fabricacion.edit', ['fabricacion' => $registroExistente->Id_OF])
-                                            ->with('warning', 'El número de OF parcial ya ha sido registrado. Redirigiendo a la entrada existente...');
-                                            return response()->json(['success' => false, 'message' => 'El número de OF parcial ya ha sido registrado.', 'id' => $registroExistente->Id_OF], 409);
-                                        }
-
-        // Crear el nuevo registro si no existe
-        $registro = new RegistroDeFabricacion();
-        // Establecer propiedades del modelo...
-        $registro->save();
+            $registro->save();
+                }
+            }
+            
+                return response()->json(['success' => true, 'message' => 'Datos guardados correctamente!']);
             }
         }
-        
-            return response()->json(['success' => true, 'message' => 'Datos guardados correctamente!']);
-        }
-    }
+    
 
- 
+
       /**
          * Display the specified resource.
          */
