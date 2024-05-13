@@ -150,7 +150,12 @@
          */
         public function update(Request $request, string $Id_OF) // Actualizar un registro de fabricación
         {
-            $registro_fabricacion = RegistroDeFabricacion::find($Nro_OF);
+            // Corrección: Cambia $Nro_OF a $Id_OF
+            $registro_fabricacion = RegistroDeFabricacion::find($Id_OF);
+            if (!$registro_fabricacion) {
+                return response()->json(['status' => 'error', 'message' => 'No se encontró el registro especificado.'], 404);
+            }
+        
             $registro_fabricacion->Nro_OF = $request->Nro_OF;
             $registro_fabricacion->Nro_Parcial = $request->Nro_Parcial;
             $registro_fabricacion->Nro_OF_Parcial = $request->Nro_OF_Parcial;
@@ -160,9 +165,12 @@
             $registro_fabricacion->Nombre_Operario = $request->Nombre_Operario;
             $registro_fabricacion->Turno = $request->Turno;
             $registro_fabricacion->Cant_Horas_Extras = $request->Cant_Horas_Extras;
+        
             $registro_fabricacion->save();
-            return redirect()->route('fabricacion.index')->with('success', 'Registro actualizado correctamente.');
-        }
+            
+            // Redirección a la vista de detalles del registro actualizado con un mensaje de éxito
+            return response()->json(['status' => 'success', 'message' => 'Registro actualizado correctamente.']);
+}
 
         /**
          * Remove the specified resource from storage.

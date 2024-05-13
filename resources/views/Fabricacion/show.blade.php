@@ -110,7 +110,29 @@
     white-space: nowrap; /* Evita que los contenidos de la celda se partan en líneas múltiples */
 }
 
-    </style>
+
+/* Estilos personalizados para los botones de acción */
+.btn-info,
+.btn-danger {
+    padding: 5px 10px; /* Añade relleno interno */
+    margin-right: 5px; /* Añade un margen derecho */
+}
+
+.btn-success {
+    padding: 5px 10px; /* Añade relleno interno */
+    margin-right: 5px; /* Añade un margen derecho */
+}
+
+/* Estilos personalizados para los botones de acción en pantallas pequeñas */
+@media (max-width: 575.98px) {
+    .btn-info,
+    .btn-danger {
+        margin-top: 5px; /* Añade un margen superior */
+        width: 100%; /* Establece el ancho al 100% */
+    }
+}
+
+</style>
 
 @section('js')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -135,7 +157,8 @@ $(document).ready(function() {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success',
-            cancelButton: 'btn btn-danger'
+            cancelButton: 'btn btn-danger',
+            actions: 'sweet-alert-actions'  // Clase personalizada para los botones
         },
         buttonsStyling: false
     });
@@ -185,20 +208,6 @@ $(document).ready(function() {
     });
 });
         
-  
-        
-//         else if (result.dismiss === Swal.DismissReason.cancel) {
-//             swalWithBootstrapButtons.fire(
-//                 'Cancelado',
-//                 'El registro está a salvo :)',
-//                 'error'
-//             );
-//         }
-//     });
-// });
-
-
-
 
     var totalCantPiezas = 0;
     var table = $('#registro_de_fabricacion').DataTable();

@@ -45,6 +45,8 @@ Route::resource('mp_ingresos', MpIngresoController::class);
 Route::resource('categoria', ProductoCategoriaController::class);
 
 
+// Dentro de web.php
+Route::put('/fabricacion/{id}', [RegistroDeFabricacionController::class, 'update'])->name('fabricacion.update');
 
 Route::delete('/fabricacion/{id}', [RegistroDeFabricacionController::class, 'destroy'])->name('fabricacion.destroy');
 

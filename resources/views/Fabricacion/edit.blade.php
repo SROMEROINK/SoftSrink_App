@@ -16,8 +16,8 @@
         </div>
     @endif
 
-    <form action="{{ route('fabricacion.update', $registro_fabricacion->Id_OF) }}" method="POST">
-    @csrf
+    <form id="updateForm" method="POST">
+        @csrf
     @method('PUT')
     <div class="form-group">
         <label for="Nro_OF">Número OF:</label>
@@ -56,5 +56,45 @@
         <input type="number" class="form-control" id="Cant_Horas_Extras" name="Cant_Horas_Extras" value="{{ $registro_fabricacion->Cant_Horas_Extras }}" required>
     </div>
     <button type="submit" class="btn btn-primary">Actualizar</button>
+    <input type="hidden" name="id" value="{{ $registro_fabricacion->Id_OF }}">
+
 </form>
+@stop
+
+@section('js')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    $(document).ready(function() {
+        $('#updateForm').on('submit', function(e) {
+            e.preventDefault(); // Detiene el envío normal del formulario
+            var formData = $(this).serialize(); // Serializa los datos del formulario
+
+            $.ajax({
+                url: '{{ route('fabricacion.update', ['fabricacion' => $registro_fabricacion->Id_OF]) }}',
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado correctamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then((result) => {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            window.location = '{{ route('fabricacion.showByNroOF', ['nroOF' => $registro_fabricacion->Nro_OF]) }}';
+                        }
+                    });
+                },
+                error: function(response) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'No se pudo actualizar el registro.'
+                    });
+                }
+            });
+        });
+    });
+</script>
 @stop
