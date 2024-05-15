@@ -20,8 +20,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/alertify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}"> <!-- Agrega esta línea si falta -->
 </head>
-<body>
+<body class="sidebar-mini sidebar-collapse">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -35,12 +36,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -81,5 +80,32 @@
             @yield('content')
         </main>
     </div>
+    <style>
+        .sidebar-mini.sidebar-collapse .nav-sidebar .nav-link {
+            width: auto;
+        }
+
+        .sidebar-mini.sidebar-collapse .nav-sidebar .nav-item {
+            width: auto;
+        }
+
+        .nav-sidebar .nav-link {
+            white-space: normal;
+        }
+    </style>
+
+    @section('js')
+    <script>
+    $(document).ready(function () {
+        // Agregar eventos para expandir y contraer el menú lateral
+        $('.main-sidebar').on('mouseenter', function () {
+            $('body').removeClass('sidebar-collapse').addClass('sidebar-open');
+        }).on('mouseleave', function () {
+            $('body').removeClass('sidebar-open').addClass('sidebar-collapse');
+        });
+    });
+    </script>
+    @stop
+    <script src="{{ asset('vendor/adminlte/dist/js/adminlte.min.js') }}"></script> <!-- Agrega esta línea si falta -->
 </body>
 </html>

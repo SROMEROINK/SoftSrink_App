@@ -190,7 +190,9 @@
         |
         */
 
-        'classes_body' => '',
+        // 'classes_body' => '', // '' las tenia por defecto
+        // 'classes_body' => 'sidebar-collapse', // Opté por cambiar a esta configuración primero
+        'classes_body' => 'sidebar-mini sidebar-collapse',
         'classes_brand' => '',
         'classes_brand_text' => '',
         'classes_content_wrapper' => '',

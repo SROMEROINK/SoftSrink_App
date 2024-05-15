@@ -1,3 +1,4 @@
+{{-- resources\views\home.blade.php --}}
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -11,10 +12,31 @@
 @stop
 
 @section('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+    /* Agrega esto a tu archivo CSS */
+.sidebar-mini.sidebar-collapse .nav-sidebar .nav-link {
+    width: auto;
+}
+
+.sidebar-mini.sidebar-collapse .nav-sidebar .nav-item {
+    width: auto;
+}
+</style>
+
+    @section('js')
+    <script>
+$(document).ready(function () {
+    // Agregar eventos para expandir y contraer el menú lateral
+    $('.main-sidebar').on('mouseenter', function () {
+        $('body').removeClass('sidebar-collapse').addClass('sidebar-open');
+    }).on('mouseleave', function () {
+        $('body').removeClass('sidebar-open').addClass('sidebar-collapse');
+    });
+});
+
+    </script>
 @stop
 
-@section('js')
+{{-- @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@stop
+@stop --}}
